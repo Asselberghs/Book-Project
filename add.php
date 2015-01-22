@@ -1,8 +1,5 @@
 <?php
-
-
 include('Connect.php');
-include('ErrorControl.php');
 include('AccessControl.php');
 echo '<form name="login" action="'.$_SERVER['PHP_SELF'].'" method="post">';
 echo '<p>Titel: <input type="text" name="Title"><br>';
@@ -22,36 +19,8 @@ echo '<input type="checkbox" name="FormatCheck[]" value="Manga">Manga<br />';
 echo '</p>';
 echo '<input type="submit" name="submit" value="Add">';
 
-$TitleErrCheckIn=$_POST['Title'];
-$AuthorErrCheckIn=$_POST['Author'];
-$GenreErrCheckIn=$_POST['Genre'];
-$SeriesErrCheckIn=$_POST['Series'];
-$CopyrightErrCheckIn=$_POST['Copyright'];
-$PublisherErrCheckIn=$_POST['Publisher'];
-$ISBNErrCheckIn=$_POST['ISBN'];
-$PriceErrCheckIn=$_POST['Price'];
 
-
-
-$TitleErrCheck=ErrorControl($TitleErrCheckIn);
-$AuthorErrCheck=ErrorControl($AuthorErrCheckIn);
-$GenreErrCheck=ErrorControl($GenreErrCheckIn);
-$SeriesErrCheck=ErrorControl($SeriesErrCheckIn);
-$CopyrightErrCheck=ErrorControl($CopyrightErrCheckIn);
-$PublisherErrCheck=ErrorControl($PublisherErrCheckIn);
-$ISBNErrCheck=ErrorControl($ISBNErrCheckIn);
-$PriceErrCheck=ErrorControl($PriceErrCheckIn);
-
-
-
-if($TitleErrCheck==TRUE || $AuthorErrCheck==TRUE || $GenreErrCheck==TRUE || $SeriesErrCheck==TRUE || $CopyrightErrCheck==TRUE || $PublisherErrCheck==TRUE || $ISBNErrCheck==TRUE || $PriceErrCheck==TRUE) {
-	
-	$ErrCheck=TRUE;
-}
-
-
-
-if(isset($_POST['submit']) && $_POST['Title']!='' && $_POST['Author']!='' && $_POST['Genre'] !='' && $ErrCheck != TRUE){
+if(isset($_POST['submit']) && $_POST['Title']!='' && $_POST['Author']!='' && $_POST['Genre'] !=''){
 
 $Title=$_POST['Title'];
 $Author=$_POST['Author'];
@@ -106,13 +75,6 @@ $titlecheck="";
 	echo '<p>Bogen findes allerede i databasen</p>';
 	
 	}
-	
-}
-
-if ($ErrCheck==TRUE) {
-	
-	
-	echo '<p>Du har indtastet ugyldige karaktere</p>';
 	
 }
 

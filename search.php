@@ -1,6 +1,5 @@
 <?php
 include('Connect.php');
-include('ErrorControl.php');
 
 session_start();
 
@@ -9,15 +8,7 @@ echo '<p><select name="Type"><option value="Title">Titel</option><option value="
 echo '<input type="submit" name="submit" value="Search">';
 echo '</form>';
 
-$TitleErrCheckIn=$_POST['Search'];
-$TitleErrCheck=ErrorControl($TitleErrCheckIn);
-
-if($TitleErrCheck==TRUE){
-	
-	$ErrCheck=TRUE;
-}
-
-if(isset($_POST['submit']) && $_POST['Search']!='' && $ErrCheck != TRUE){
+if(isset($_POST['submit']) && $_POST['Search']!=''){
 
 $Search=$_POST['Search'];
 $Type=$_POST['Type'];
@@ -69,15 +60,8 @@ echo "</center>";
 
 }
 
-if ($ErrCheck==TRUE) {
-	
-	
-	echo '<p>Du har indtastet ugyldige karaktere</p>';
-	
-}
-
 else {
 	
-		Echo '<p>Formen er tom, ingen data er indsaette</p>';
+		echo '<p>Formen er tom, ingen data er indsaette</p>';
 }
 ?>

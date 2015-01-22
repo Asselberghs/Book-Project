@@ -1,7 +1,6 @@
 <?php
 
 include('Connect.php');
-include('ErrorControl.php');
 include('AccessControl.php');
 $Title=$_GET['Title'];
 $ID=$_GET['ID'];
@@ -54,37 +53,9 @@ echo '<p>Udlaant til: </p><input type="text" name="Loaner" value="'.$Loaner.'">'
 echo '<input type="hidden" name="ID" value="'.$ID.'"><br>';
 echo '<input type="submit" name="submit" value="Opdater">';
 
-$TitleErrCheckIn=$_POST['Title'];
-$AuthorErrCheckIn=$_POST['Author'];
-$GenreErrCheckIn=$_POST['Genre'];
-$SeriesErrCheckIn=$_POST['Series'];
-$CopyrightErrCheckIn=$_POST['Copyright'];
-$PublisherErrCheckIn=$_POST['Publisher'];
-$ISBNErrCheckIn=$_POST['ISBN'];
-$PriceErrCheckIn=$_POST['Price'];
-$LoanerErrCheckIn=$_POST['Loaner'];
 
 
-$TitleErrCheck=ErrorControl($TitleErrCheckIn);
-$AuthorErrCheck=ErrorControl($AuthorErrCheckIn);
-$GenreErrCheck=ErrorControl($GenreErrCheckIn);
-$SeriesErrCheck=ErrorControl($SeriesErrCheckIn);
-$CopyrightErrCheck=ErrorControl($CopyrightErrCheckIn);
-$PublisherErrCheck=ErrorControl($PublisherErrCheckIn);
-$ISBNErrCheck=ErrorControl($ISBNErrCheckIn);
-$PriceErrCheck=ErrorControl($PriceErrCheckIn);
-$LoanerErrCheck=ErrorControl($LoanerErrCheckIn);
-
-
-
-
-if($TitleErrCheck==TRUE || $AuthorErrCheck==TRUE || $GenreErrCheck==TRUE || $SeriesErrCheck==TRUE || $CopyrightErrCheck==TRUE || $PublisherErrCheck==TRUE || $ISBNErrCheck==TRUE || $PriceErrCheck==TRUE || $LoanerErrCheck==TRUE) {
-	
-	$ErrCheck=TRUE;
-}
-
-
-if(isset($_POST['submit']) && $_POST['Title']!='' && $_POST['Author']!='' && $_POST['Genre'] !='' && $ErrCheck != TRUE){
+if(isset($_POST['submit']) && $_POST['Title']!='' && $_POST['Author']!='' && $_POST['Genre'] !=''){
 
 $ID=$_POST['ID'];
 $Lend=$_POST['Lend'];
@@ -193,13 +164,6 @@ try {
 
 echo '<p>Bogen er blevet opdateret</p>';
 
-}
-
-if ($ErrCheck==TRUE) {
-	
-	
-	echo '<p>Du har indtastet ugyldige karaktere</p>';
-	
 }
 
 else {

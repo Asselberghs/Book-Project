@@ -1,6 +1,5 @@
 <?php
 include('Connect.php');
-include('ErrorControl.php');
 include('AccessControl.php');
 $Title=$_GET['Title'];
 $ID=$_GET['ID'];
@@ -17,16 +16,8 @@ echo '</select><br>';
 echo '<input type="hidden" name="ID" value="'.$ID.'">';
 echo '<input type="submit" name="submit" value="Slet">';
 
-$TitleErrCheckIn=$_POST['Title'];
-$TitleErrCheck=ErrorControl($TitleErrCheckIn);
 
-if($TitleErrCheck==TRUE) {
-	
-	$ErrCheck=TRUE;
-}
-
-
-if(isset($_POST['submit']) && $ErrCheck != TRUE){
+if(isset($_POST['submit'])){
 
 $Title=$_POST['Title'];
 $Format=$_POST['Format'];
@@ -42,13 +33,6 @@ try{
 
 echo '<p>Bogen er blevet slettet</p>';
 
-}
-
-if ($ErrCheck==TRUE) {
-	
-	
-	echo '<p>Du har indtastet ugyldige karaktere</p>';
-	
 }
 
 else {
