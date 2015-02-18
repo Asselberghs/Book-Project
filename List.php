@@ -1,21 +1,5 @@
 <?php
-/*
-    This is a media database to mange your Books.
-    Copyright (C) 2013 Nick Tranholm Asselberghs
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
 session_start();
 
 
@@ -36,6 +20,7 @@ if(isset($_SESSION['Logged_In'])) {
 echo '<td><p>Pris</p></td>';	
 }
 echo '<td><p>Format</p></td>';
+echo '<td><p>Ejer</p></td>';
 echo '</tr>';
 
 while($row = $result->fetch(PDO::FETCH_OBJ)) 
@@ -49,7 +34,12 @@ while($row = $result->fetch(PDO::FETCH_OBJ))
 	{
 	 	echo "<td bgcolor='red'><p>$row->Price</p></td>";
 	}
+    
+    $User = $row->User;
+    $User = ucfirst($User);
+    
 	echo "<td bgcolor='red'>$row->Format</td>";
+    echo "<td bgcolor='red'>".$User."</td>";
 
       	if(isset($_SESSION['Logged_In'])){
          	 echo "<td bgcolor='red'><a href='update_display.php?Title=$row->Title&ID=$row->ID&Author=$row->Author&Genre=$row->Genre&Series=$row->Series&Copyright=$row->Copyright&Publisher=$row->Publisher&ISBN=$row->ISBN&Price=$row->Price&Format=$row->Format'>Edit</a></td><td bgcolor='red'><a href='delete_display.php?Title=$row->Title&ID=$row->ID'>Delete</a></td><td><p>$row->Loaner</p></td>";
@@ -66,7 +56,12 @@ if(isset($_SESSION['Logged_In']))
 {
 	echo "<td><p>$row->Price</p></td>";
 }
+
+$User = $row->User;
+$User = ucfirst($User);
+
 echo "<td><p>$row->Format</p></td>";
+echo "<td><p>".$User."</p></td>";
 
       if(isset($_SESSION['Logged_In'])){
           echo "<td bgcolor='#808080'><a href='update_display.php?Title=$row->Title&ID=$row->ID&Author=$row->Author&Genre=$row->Genre&Series=$row->Series&Copyright=$row->Copyright&Publisher=$row->Publisher&ISBN=$row->ISBN&Price=$row->Price&Format=$row->Format'>Edit</a></td><td bgcolor='#808080'><a href='delete_display.php?Title=$row->Title&ID=$row->ID'>Delete</a></td>";

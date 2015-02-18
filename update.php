@@ -1,22 +1,7 @@
 <?php
-/*
-    This is a media database to mange your Books.
-    Copyright (C) 2013 Nick Tranholm Asselberghs
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
 include('Connect.php');
+include('ErrorControl.php');
 include('AccessControl.php');
 $Title=$_GET['Title'];
 $ID=$_GET['ID'];
@@ -54,24 +39,52 @@ echo '<p>Publisher: </p><input type="text" name="Publisher" value="'.$Publisher.
 echo '<p>ISBN: </p><input type="text" name="ISBN" value="'.$ISBN.'"><br>';
 echo '<p>Price: </p><input type="text" name="Price" value="'.$Price.'"><br>';
 echo '<p>Format: </p>';
-echo '<input type="checkbox" name="FormatCheck[]" value="Paperback">Paperback<br />';
-echo '<input type="checkbox" name="FormatCheck[]" value="Hardback">Hardback<br />';
-echo '<input type="checkbox" name="FormatCheck[]" value="E-Book">E-Book<br />';
-echo '<input type="checkbox" name="FormatCheck[]" value="Comic">Comic<br />';
-echo '<input type="checkbox" name="FormatCheck[]" value="Manga">Manga<br />';
+echo '<input type="checkbox" name="FormatCheck[]" id="Paperback" value="Paperback"> <label for="Paperback">Paperback</label><br />';
+echo '<input type="checkbox" name="FormatCheck[]" id="Hardback" value="Hardback"> <label for="Hardback">Hardback</label><br />';
+echo '<input type="checkbox" name="FormatCheck[]" id="E-Book" value="E-Book"> <label for="E-Book">E-Book</label><br />';
+echo '<input type="checkbox" name="FormatCheck[]" id="Comic" value="Comic"> <label for="Comic">Comic</label><br />';
+echo '<input type="checkbox" name="FormatCheck[]" id="Manga" value="Manga"> <label for="Manga">Manga</label><br />';
 
 echo '<p>Udlaant?</p><select name="Lend">';
 echo '<option value="Yes">Yes</option>';
-echo '<option value="No">No</option>';
+echo '<option value="No" selected="selected">No</option>';
 echo '</select><br>';
 
 echo '<p>Udlaant til: </p><input type="text" name="Loaner" value="'.$Loaner.'">';
 echo '<input type="hidden" name="ID" value="'.$ID.'"><br>';
 echo '<input type="submit" name="submit" value="Opdater">';
 
+$TitleErrCheckIn=$_POST['Title'];
+$AuthorErrCheckIn=$_POST['Author'];
+$GenreErrCheckIn=$_POST['Genre'];
+$SeriesErrCheckIn=$_POST['Series'];
+$CopyrightErrCheckIn=$_POST['Copyright'];
+$PublisherErrCheckIn=$_POST['Publisher'];
+$ISBNErrCheckIn=$_POST['ISBN'];
+$PriceErrCheckIn=$_POST['Price'];
+$LoanerErrCheckIn=$_POST['Loaner'];
 
 
-if(isset($_POST['submit']) && $_POST['Title']!='' && $_POST['Author']!='' && $_POST['Genre'] !=''){
+$TitleErrCheck=ErrorControl($TitleErrCheckIn);
+$AuthorErrCheck=ErrorControl($AuthorErrCheckIn);
+$GenreErrCheck=ErrorControl($GenreErrCheckIn);
+$SeriesErrCheck=ErrorControl($SeriesErrCheckIn);
+$CopyrightErrCheck=ErrorControl($CopyrightErrCheckIn);
+$PublisherErrCheck=ErrorControl($PublisherErrCheckIn);
+$ISBNErrCheck=ErrorControl($ISBNErrCheckIn);
+$PriceErrCheck=ErrorControl($PriceErrCheckIn);
+$LoanerErrCheck=ErrorControl($LoanerErrCheckIn);
+
+
+
+
+if($TitleErrCheck==TRUE || $AuthorErrCheck==TRUE || $GenreErrCheck==TRUE || $SeriesErrCheck==TRUE || $CopyrightErrCheck==TRUE || $PublisherErrCheck==TRUE || $ISBNErrCheck==TRUE || $PriceErrCheck==TRUE || $LoanerErrCheck==TRUE) {
+	
+	$ErrCheck=TRUE;
+}
+
+
+if(isset($_POST['submit']) && $_POST['Title']!='' && $_POST['Author']!='' && $_POST['Genre'] !='' && $ErrCheck != TRUE){
 
 $ID=$_POST['ID'];
 $Lend=$_POST['Lend'];
@@ -177,9 +190,25 @@ try {
     echo $e->getMessage();
 }
 
+$Query_String12=$db->prepare("UPDATE Book SET User = :user WHERE ID = :id");
+$Query_String12->bindParam(':user', $_SESSION['User'], PDO::PARAM_STR);
+$Query_String12->bindParam(':id', $ID, PDO::PARAM_STR);
+
+try {
+    $Query_String12->execute();
+}catch(PDOException $e) {
+    echo $e->getMessage();
+}
 
 echo '<p>Bogen er blevet opdateret</p>';
 
+}
+
+if ($ErrCheck==TRUE) {
+	
+	
+	echo '<p>Du har indtastet ugyldige karaktere</p>';
+	
 }
 
 else {
