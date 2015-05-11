@@ -21,7 +21,7 @@ I have had good use of this for the last few years, I hope you will find it usef
 
 ### Who do I talk to? ###
 
-* Nick Asselberghs https://bitbucket.org/Asselberghs
+* Nick Asselberghs https://github.com/Asselberghs/
 
 ### TODO ###
 
