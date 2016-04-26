@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 188.121.44.159
--- Generation Time: Jul 08, 2014 at 02:17 PM
--- Server version: 5.5.36
+-- Generation Time: Apr 26, 2016 at 02:05 AM
+-- Server version: 5.5.43
 -- PHP Version: 5.1.6
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
@@ -38,8 +38,10 @@ CREATE TABLE `Book` (
   `Format` varchar(60) NOT NULL,
   `Lend` varchar(11) NOT NULL,
   `Loaner` varchar(20) NOT NULL,
+  `User` varchar(20) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=194 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=214 ;
+
 
 -- --------------------------------------------------------
 
@@ -56,8 +58,9 @@ CREATE TABLE `Game` (
   `Lend` varchar(11) CHARACTER SET latin1 COLLATE latin1_danish_ci NOT NULL,
   `Loaner` varchar(20) CHARACTER SET latin1 COLLATE latin1_danish_ci NOT NULL,
   `Price` int(11) NOT NULL,
+  `User` varchar(20) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=71 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=81 ;
 
 -- --------------------------------------------------------
 
@@ -76,8 +79,10 @@ CREATE TABLE `Movie` (
   `Loaner` varchar(20) CHARACTER SET latin1 COLLATE latin1_danish_ci NOT NULL,
   `Genre` varchar(20) CHARACTER SET latin1 COLLATE latin1_danish_ci NOT NULL,
   `Price` int(11) NOT NULL,
+  `User` varchar(20) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=243 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=273 ;
+
 
 -- --------------------------------------------------------
 
@@ -87,10 +92,12 @@ CREATE TABLE `Movie` (
 
 CREATE TABLE `Users` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `clef_id` int(11) NOT NULL,
   `User` varchar(20) NOT NULL,
   `Password` text NOT NULL,
   `SALT` text NOT NULL,
   `logged_out_at` datetime NOT NULL,
+  `Email` varchar(50) NOT NULL,
+  `Yubikey` varchar(12) NOT NULL,
+  `Yubikey_Used` varchar(5) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
