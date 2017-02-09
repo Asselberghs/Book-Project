@@ -24,7 +24,7 @@ include('Connect.php');
 include('ErrorControl.php');
 include('AccessControl.php');
 echo '<form name="login" action="'.$_SERVER['PHP_SELF'].'" method="post">';
-echo '<p>Titel: <input type="text" name="Title"><br>';
+echo 'Titel: <input type="text" name="Title"><br>';
 echo 'Forfatter: <input type="text" name="Author"><br>';
 echo 'Genre: <input type="text" name="Genre"><br>';
 echo 'Serie: <input type="text" name="Series"><br>';
@@ -32,14 +32,13 @@ echo 'Copyright: <input type="text" name="Copyright"><br>';
 echo 'Forlag: <input type="text" name="Publisher"><br>';
 echo 'ISBN: <input type="text" name="ISBN"><br>';
 echo 'Pris: <input type="text" name="Price"><br>';
-echo 'Format:';
+echo 'Format:<br />';
 echo '<input type="checkbox" name="FormatCheck[]" id="Paperback" value="Paperback"> <label for="Paperback">Paperback</label><br />';
 echo '<input type="checkbox" name="FormatCheck[]" id="Hardback" value="Hardback"> <label for="Hardback">Hardback</label><br />';
 echo '<input type="checkbox" name="FormatCheck[]" id="E-Book" value="E-Book"> <label for="E-Book">E-Book</label><br />';
 echo '<input type="checkbox" name="FormatCheck[]" id="Comic" value="Comic"> <label for="Comic">Comic</label><br />';
-echo '<input type="checkbox" name="FormatCheck[]" id="Manga" value="Manga"> <label for="Manga">Manga</label><br />';
-echo '</p>';
-echo '<input type="submit" name="submit" value="Add">';
+echo '<input type="checkbox" name="FormatCheck[]" id="Manga" value="Manga"> <label for="Manga">Manga</label><br /><br />';
+echo '<input type="submit" name="submit" value="Tilføj"><br />';
 
 $TitleErrCheckIn=$_POST['Title'];
 $AuthorErrCheckIn=$_POST['Author'];
@@ -64,7 +63,7 @@ $PriceErrCheck=ErrorControl($PriceErrCheckIn);
 
 
 if($TitleErrCheck==TRUE || $AuthorErrCheck==TRUE || $GenreErrCheck==TRUE || $SeriesErrCheck==TRUE || $CopyrightErrCheck==TRUE || $PublisherErrCheck==TRUE || $ISBNErrCheck==TRUE || $PriceErrCheck==TRUE) {
-	
+    
 	$ErrCheck=TRUE;
 }
 

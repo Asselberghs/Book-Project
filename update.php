@@ -70,8 +70,8 @@ echo '<option value="No" selected="selected">No</option>';
 echo '</select><br>';
 
 echo '<p>Udlaant til: </p><input type="text" name="Loaner" value="'.$Loaner.'">';
-echo '<input type="hidden" name="ID" value="'.$ID.'"><br>';
-echo '<input type="submit" name="submit" value="Opdater">';
+echo '<input type="hidden" name="ID" value="'.$ID.'"><br><br />';
+echo '<input type="submit" name="submit" value="Opdater"><br />';
 
 $TitleErrCheckIn=$_POST['Title'];
 $AuthorErrCheckIn=$_POST['Author'];
@@ -98,7 +98,7 @@ $LoanerErrCheck=ErrorControl($LoanerErrCheckIn);
 
 
 if($TitleErrCheck==TRUE || $AuthorErrCheck==TRUE || $GenreErrCheck==TRUE || $SeriesErrCheck==TRUE || $CopyrightErrCheck==TRUE || $PublisherErrCheck==TRUE || $ISBNErrCheck==TRUE || $PriceErrCheck==TRUE || $LoanerErrCheck==TRUE) {
-	
+    
 	$ErrCheck=TRUE;
 }
 
