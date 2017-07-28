@@ -78,11 +78,20 @@ right:1000px;
 }
 
 select {
-    position: absolute;
-    right: 1000px;
+    position: relative;
+    left: 20px;
 }
 
-input[type="submit"] {
-    position: absolute;
-    right: 1000px;
+input[type="text"] {
+    position: relative;
+    left: 20px;
+}
+
+input#Searchsubmit {
+    position: relative;
+    left: 25px;
+}
+
+.borrowed {
+    background-color: #FF0000 !important;
 }

@@ -16,32 +16,40 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+require('Classes/BookDatabase.php');
+$database = new BookDatabase('IP_Address','Username','Password','Database_Name');
 ?>
-<?php
-session_start();
-echo '<html>';
-echo '<head>';
-echo '<Title>Asselberghs.dk';
-echo '</Title>';
-echo '<link href="style.css" rel="stylesheet" type="text/css">';
-echo '<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>';
-echo '</head>';
-echo '<body>';
-echo '<div id="Top"><br>';
-echo 'Asselberghs.dk';
-echo '</div>';
-echo '<div id="MainMenu">';
-include('mainmenu.php');
-echo '</div>';
-echo '<div id="Menu">';
-include('menu.php');
-echo '</div>';
-echo '<div id="Content">';
-include('login.php');
-echo '</div>';
-echo '<div id="Footer">';
-include('footer.php');
-echo '</div>';
-echo '</body>';
-echo '</html>';
-?>
+<html>
+<head>
+<Title>Asselberghs.dk
+</Title>
+<link href="style.css" rel="stylesheet" type="text/css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div id="Top"><br>
+Asselberghs.dk
+</div>
+<div id="MainMenu">
+    <?php
+    include('mainmenu.php');
+    ?>
+</div>
+<div id="Menu">
+    <?php
+    include('menu.php');
+    ?>
+</div>
+<div id="Content">
+    <?php
+    $database->showLogin();
+    ?>
+</div>
+<div id="Footer">
+    <?php
+    include('footer.php');
+    ?>
+</div>
+</body>
+</html>
